@@ -1,0 +1,14 @@
+RewriteEngine On
+
+#Ha a file nem létezik
+RewriteCond %{REQUEST_FILENAME} !-f
+#Ha a könyvtár nem létezik
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#Írd felül ezzel
+#RewriteRule ^mit\.html$ mire.html
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+#[L] flag jelentése:
+#közölnünk kell a htaccess-el,hogy az éppen érvényes utasítás - amennyiben végrehajtódik - volt az utolsó, 
+#és ha ezt végrehajtja, akkor már a többit nem kell figyelembe vennie.
