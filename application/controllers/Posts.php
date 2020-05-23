@@ -23,4 +23,49 @@
             $this->load->view('posts/view', $data);
             $this->load->view('templates/footer');
         }
+
+        //TODO: csak akkor lehessen posztot készíteni ha be van jelentkezve
+        public function create(){
+            $data['title'] = 'Create Post';
+
+            //Validation rules
+            $this->form_validation->set_rules('title', 'Title', 'required');
+            $this->form_validation->set_rules('body', 'Body', 'required');
+
+            if($this->form_validation->run() === FALSE){
+                $this->load->view('templates/header');
+                $this->load->view('posts/create', $data);
+                $this->load->view('templates/footer');
+            } else {
+                $this->post_model->create_post();
+                redirect('posts');
+            }
+        }
+
+        //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd a poszt
+        public function delete($id){
+            $this->post_model->delete_post($id);
+            redirect('posts');
+        }
+
+        //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
+        public function edit($slug){
+            $data['post'] = $this->post_model->get_posts($slug);
+            
+            if(empty($data['post'])){
+                show_404();
+            }
+
+            $data['title'] = 'Edit Post';
+
+            $this->load->view('templates/header');
+            $this->load->view('posts/edit', $data);
+            $this->load->view('templates/footer');
+        }
+
+        //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
+        public function update(){
+            $this->post_model->update_post();
+            redirect('posts');
+        }
     }
