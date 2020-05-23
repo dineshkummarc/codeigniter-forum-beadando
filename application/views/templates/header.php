@@ -1,12 +1,15 @@
 <html>
     <head>
         <title>CI Forum</title>
-        <link href="./assets/css/bootswatch-sketchy-theme.min.css" rel="stylesheet" type="text/css">
-        <script src="./assets/js/bootstrap.min.js"></script>
+        <!-- Link Bootswatch Sketchy Theme CSS and JS-->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootswatch-sketchy-theme.min.css" rel="stylesheet" type="text/css">
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+        <!-- Link custom CSS -->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="<?php echo base_url(); ?>">Codeigniter Forum</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,6 +18,9 @@
             <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo base_url(); ?>">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url(); ?>posts">Forum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
