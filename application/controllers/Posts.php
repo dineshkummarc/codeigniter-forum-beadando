@@ -5,6 +5,10 @@
             
             $data['posts'] = $this->post_model->get_posts();
             
+            //Number of words shown / post in the pages/index view
+            $number_of_words = 60;
+            $data['number_of_words'] = $number_of_words;
+
             $this->load->view('templates/header');
             $this->load->view('posts/index', $data);
             $this->load->view('templates/footer');
