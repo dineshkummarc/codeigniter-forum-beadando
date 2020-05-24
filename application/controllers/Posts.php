@@ -21,7 +21,8 @@
                 show_404();
             }
 
-            $data['title'] = $data['post']['title'];
+            //FIXME: 
+            //$data['title'] = $data['post']['title'];
 
             $this->load->view('templates/header');
             $this->load->view('posts/view', $data);
