@@ -10,8 +10,7 @@ CREATE TABLE `codeigniter-forum`.`posts` (
      `id` INT NOT NULL AUTO_INCREMENT , 
      `user_id` INT NOT NULL , 
      `category_id` INT NOT NULL , 
-     `title` VARCHAR(250) NOT NULL , 
-     `slug` VARCHAR(250) NOT NULL , 
+     `title` VARCHAR(250) NOT NULL ,
      `body` TEXT NOT NULL , 
      `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
      PRIMARY KEY (`id`)) ENGINE = InnoDB;

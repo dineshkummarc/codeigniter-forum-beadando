@@ -5,24 +5,23 @@ class Post_model extends CI_Model{
         $this->load->database();
     }
 
-    public function get_posts($slug = FALSE){
-        if($slug == FALSE){
+    public function get_posts($id = FALSE){
+        if($id == FALSE){
+            //TODO: utolsó bejegyzést felülre?
             $this->db->order_by('id', 'ASC');
             $query = $this->db->get('posts');
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('posts', array('slug' => $slug));
+        $query = $this->db->get_where('posts', array('id' => $id));
         return $query->row_array();
     }
 
     public function create_post(){
         //get the form values
-        $slug = url_title($this->input->post('title'));
-
         $data = array(
+            //TODO: add user_id, category_id ...
             'title' => $this->input->post('title'),
-            'slug' => $slug,
             'body' => $this->input->post('body')
         );
 
@@ -36,11 +35,9 @@ class Post_model extends CI_Model{
     }
 
     public function update_post(){
-        $slug = url_title($this->input->post('title'));
-        echo $this->input->post('id');
         $data = array(
+            //TODO: add user_id, category_id ...
             'title' => $this->input->post('title'),
-            'slug' => $slug,
             'body' => $this->input->post('body')
         );
 

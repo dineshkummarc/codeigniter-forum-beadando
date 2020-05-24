@@ -10,8 +10,8 @@
             $this->load->view('templates/footer');
         }
 
-        public function view($slug = NULL){
-            $data['post'] = $this->post_model->get_posts($slug);
+        public function view($id = NULL){
+            $data['post'] = $this->post_model->get_posts($id);
             
             if(empty($data['post'])){
                 show_404();
@@ -49,8 +49,8 @@
         }
 
         //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
-        public function edit($slug){
-            $data['post'] = $this->post_model->get_posts($slug);
+        public function edit($id){
+            $data['post'] = $this->post_model->get_posts($id);
             
             if(empty($data['post'])){
                 show_404();
