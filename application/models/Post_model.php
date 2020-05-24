@@ -8,8 +8,12 @@ class Post_model extends CI_Model{
     public function get_posts($id = FALSE){
         if($id == FALSE){
             //TODO: utolsó bejegyzést felülre?
-            $this->db->order_by('id', 'ASC');
-            $query = $this->db->get('posts');
+            $this->db->select('*');
+            $this->db->from('posts');
+            //JOIN
+            //$this->db->join('table2', 'table1.id=table2.id')
+            $this->db->join('sub_categories', 'posts.subcategory_id = sub_categories.id');
+            $query = $this->db->get();
             return $query->result_array();
         }
 
@@ -21,7 +25,6 @@ class Post_model extends CI_Model{
         //get the form values
         $data = array(
             //TODO: add user_id, category_id ...
-            'title' => $this->input->post('title'),
             'body' => $this->input->post('body')
         );
 

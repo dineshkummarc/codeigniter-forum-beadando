@@ -12,14 +12,18 @@
         }
 
         public function view($id = NULL){
-            // TODO: list sub categories
             $data['main_category'] = $this->main_category_model->get_main_categories($id);
+            // TODO: list sub categories
+            $data['sub_categories'] = $this->sub_category_model->get_sub_categories_by_parent_category_id($id);
             
             if(empty($data['main_category'])){
                 show_404();
             }
 
-            $data['name'] = $data['main_category']['name'];
+            //TODO: finish it
+            $link = site_url('/subcategories/create/').$id;
+            $data['title'] = $data['main_category']['name'].'<a class="btn btn-outline-success float-right" 
+            href="'.$link.'">Create Sub-Category</a>';
 
             $this->load->view('templates/header');
             $this->load->view('categories/view', $data);
@@ -39,7 +43,29 @@
                 $this->load->view('categories/create', $data);
                 $this->load->view('templates/footer');
             } else {
-                $this->main_category_model->create_main_category();
+                //Upload image
+                $config['upload_path'] = './assets/images/categories/';
+                $config['allowed_types'] = 'jpg|jpeg|gif|png';
+                $config['max_size'] = 2048;
+                $config['max_width'] = 2000;
+                $config['max_height'] = 2000;
+                $config['overwrite'] = FALSE;
+                
+                $this->load->library('upload', $config);
+                if(!$this->upload->do_upload('categoryimage')){
+                    $view_params = [
+                        'errors' => $this->upload->display_errors()
+                      ];
+                      $this->load->view('categories/create', $view_params);
+                    
+                    $post_image = 'noimage.jpg';
+                }else {
+                    $data = array('upload_data' => $this->upload->data());
+                    $post_image = $_FILES['categoryimage']['name'];
+                }
+
+                $this->main_category_model->create_main_category($post_image);
+                //TODO: redirect to the new categories view page
                 redirect('categories');
             }
         }
@@ -68,6 +94,7 @@
         //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
         public function update(){
             $this->main_category_model->update_main_category();
+            //TODO: redirect to the edited categories view page
             redirect('categories');
         }
     }

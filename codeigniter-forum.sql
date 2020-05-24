@@ -12,7 +12,7 @@ CREATE TABLE `codeigniter-forum`.`posts` (
      `subcategory_id` INT NOT NULL , 
      `parent_post_id` INT NOT NULL DEFAULT '0' ,
      `body` TEXT NOT NULL , 
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
      PRIMARY KEY (`id`)) 
 ENGINE = InnoDB;
 
@@ -20,15 +20,17 @@ ENGINE = InnoDB;
 CREATE TABLE `codeigniter-forum`.`categories` ( 
      `id` INT NOT NULL AUTO_INCREMENT , 
      `name` VARCHAR(100) NOT NULL , 
-     `description` VARCHAR(250) NOT NULL,
+     `description` TEXT NOT NULL,
      `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+     `post_image` VARCHAR 250 NOT NULL,
      PRIMARY KEY (`id`)) 
 ENGINE = InnoDB;
 
 -- Create sub_categories table
 CREATE TABLE `codeigniter-forum`.`sub_categories` 
 ( 
-     `id` INT NOT NULL AUTO_INCREMENT , 
+     `id` INT NOT NULL AUTO_INCREMENT ,
+     `user_id` INT NOT NULL, 
      `maincategory_id` INT NOT NULL , 
      `name` VARCHAR(250) NOT NULL , 
      `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 

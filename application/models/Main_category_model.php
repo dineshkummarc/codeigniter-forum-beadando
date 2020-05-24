@@ -17,15 +17,16 @@ class Main_category_model extends CI_Model{
     }
 
     //TODO: csak admin hozhatja létre
-    public function create_main_category(){
+    public function create_main_category($post_image){
         //get the form values
         $data = array(
             //TODO: ki hozhat létre?
             'name' => $this->input->post('name'),
-            'description' => $this->input->post('description')
+            'description' => $this->input->post('description'),
+            'photo' => $post_image
         );
 
-        return $this->db->insert('categories', $data);
+        $this->db->insert('categories', $data);
     }
 
     public function delete_main_category($id){
