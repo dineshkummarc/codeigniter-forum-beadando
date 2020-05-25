@@ -48,7 +48,8 @@
                 <!-- Edit -->
                 <a class="btn btn-outline-warning d-inline-block float-left" href="edit/<?php //echo $main_category['id']; ?>">Edit</a>
                 <!-- Delete -->
-                <?php echo form_open('/categories/delete/', 'class="d-inline;"'); ?>
+                <?php echo form_open('/posts/delete/'.$post['id'], 'class="d-inline;"'); ?>
+                <input type="hidden" name="subcategory_id" value="<?= $subcategory['id']; ?>">
                 <input type="submit" value="Delete" class="btn btn-outline-danger">
                 <?php echo form_close(); ?>
         </div>

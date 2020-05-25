@@ -60,7 +60,8 @@
         //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd a poszt
         public function delete($id){
             $this->post_model->delete_post($id);
-            redirect('posts');
+            $subcategory_id = $this->input->post('subcategory_id');
+            redirect(base_url('posts/topic/').$subcategory_id);
         }
 
         //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
