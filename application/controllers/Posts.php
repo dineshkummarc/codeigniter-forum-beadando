@@ -29,6 +29,17 @@
             $this->load->view('templates/footer');
         }
 
+        public function topic($subcategory_id){
+            $data['posts'] = $this->post_model->get_posts_as_same_subcategory($subcategory_id);
+            $data['subcategory'] = $this->sub_category_model->get_sub_categories($subcategory_id);
+            $data['title'] = '<strong>Topic</strong></br>'.$data['subcategory']['name'].'<a class="btn btn-outline-success float-right" 
+            href="'.site_url('/posts/create').'">Answer</a>';
+
+            $this->load->view('templates/header');
+            $this->load->view('posts/topic', $data);
+            $this->load->view('templates/footer');
+        }
+
         //TODO: csak akkor lehessen posztot készíteni ha be van jelentkezve
         public function create(){
             $data['title'] = 'Create Post';

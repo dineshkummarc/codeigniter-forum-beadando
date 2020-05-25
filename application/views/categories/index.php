@@ -13,7 +13,7 @@
                 <?php echo word_limiter($category['description'], $number_of_words); ?>
             </div>
         </div>
-        <p><a class="btn btn-outline-info" href="<?php echo site_url('/categories/'.$category['id']); ?>">Show Sub Categories</a></p>
+        <p class="mt-2 d-flex justify-content-end"><a class="btn btn-outline-info" href="<?php echo site_url('categories/'.$category['id']); ?>">Show Topics</a></p>
     </div>
 <?php endforeach; ?>
 

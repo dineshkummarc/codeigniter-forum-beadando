@@ -13,9 +13,7 @@
 
         public function view($id = NULL){
             $data['main_category'] = $this->main_category_model->get_main_categories($id);
-            // TODO: list sub categories
-            $data['sub_category'] = $this->sub_category_model->get_sub_categories($id);
-            $data['sub_category'] = $this->sub_category_model->get_sub_categories($id);
+            $data['sub_category'] = $this->sub_category_model->get_subcategories_of_maincategory($id);
             
             if(empty($data['main_category'])){
                 show_404();
@@ -52,25 +50,23 @@
                 
                 $this->load->library('upload', $config);
 
-                //Ha nem akar feltölteni képet
-                if(empty($_FILES['categoryimage']['name'])){
-                    $post_image = 'noimage.jpg';
-                }
                 //Ha valami baj van a feltöltéssel
-                elseif(!$this->upload->do_upload('categoryimage')){
+                if(!$this->upload->do_upload('categoryimage')){
                     $data['errors'] = $this->upload->display_errors();
                     $this->load->view('templates/header');
                     $this->load->view('categories/create', $data);
                     $this->load->view('templates/footer');
                 }
-                //ha minden rendben
-                else {
-                    $data = array('upload_data' => $this->upload->data());
+
+                $data = array('upload_data' => $this->upload->data());
+                if(empty($_FILES['categoryimage']['name'])){
+                    $post_image = 'noimage.jpg';
+                } else {
                     $post_image = $_FILES['categoryimage']['name'];
-                    $this->main_category_model->create_main_category($post_image);
-                    //TODO: redirect to the new categories view page
-                    redirect('categories');
                 }
+                $this->main_category_model->create_main_category($post_image);
+                //TODO: redirect to the new categories view page
+                redirect('categories');
             }
         }
 
@@ -78,24 +74,10 @@
         //Sub Category létrehozása egy Main Category view nézetében
         public function create_subcategory($maincategory_id){
             if($this->input->post('submit')){
-                // valaki rákattintott a submit-ra, az adatokat validálni kell
-                $this->load->library('form_validation');
-                // validációs szabályok beállítása 
-                $this->form_validation->set_rules('name', 'Name', 'required');
-    
-                if($this->form_validation->run() === FALSE){
-                    //FIXME: KIIRATNI AZ ERRORT
-                    //Valamiért mindig a /categories/create_subcategory/14 be akar bedobni ....
-                    //$this->load->view('templates/header');
-                    //$this->load->view(base_url('categories/'.$maincategory_id));
-                    //$this->load->view('templates/footer');
-                    redirect('categories/'.$maincategory_id);
-                } else{
-                    // a validáció sikeres
-                    $this->sub_category_model->create_sub_category($maincategory_id, $this->input->post('name'));
-    
-                    redirect('categories/'.$maincategory_id);
-                }
+                // a validáció sikeres
+                $this->sub_category_model->create_sub_category($maincategory_id, $this->input->post('name'));
+
+                redirect('categories/'.$maincategory_id);
             }
         }
 

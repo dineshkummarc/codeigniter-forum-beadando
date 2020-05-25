@@ -17,30 +17,42 @@
         //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd az alkategóra
         public function delete($id){
             $this->sub_category_model->delete_sub_category($id);
-
-             //TODO: akkor az összes ehhez tartozó kommentet is ki kell törölni hékás!
+            //Az összes ehhez tartozó posztot is kitörli
+            $this->post_model->delete_posts_by_subcategory_id($id);
 
             redirect('categories');
         }
 
         //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
-        public function edit($id){
-            $data['subcategories'] = $this->sub_category_model->get_sub_categories($id);
-            
-            if(empty($data['subcategories'])){
-                show_404();
+        public function edit($id =NULL){
+            if($id == NULL){
+                show_error('A szerkesztéshez hiáynzik az id!');
             }
 
-            $data['title'] = 'Edit Sub-Category';
+            $record = $this->sub_category_model->get_sub_categories($id);
 
-            $this->load->view('templates/header');
-            $this->load->view('subcategories/edit', $data);
-            $this->load->view('templates/footer');
+            //$data['subcategories'] = $this->sub_category_model->get_sub_categories($id);
+
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('name','Name','required');
+
+            if($this->form_validation->run() == TRUE){
+                $this->sub_category_model->update_sub_category( $id, $this->input->post('name'));
+                redirect(base_url('posts/topic/'.$id));
+            } else {
+                $view_params['subcategory'] = $record;
+                $view_params['title'] = 'Edit Sub-Category';
+
+                $this->load->view('templates/header');
+                $this->load->view('subcategories/edit', $view_params);
+                $this->load->view('templates/footer');
+            }
         }
 
         //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
-        public function update(){
+        /*public function update(){
+            $this->form_validation->set_rules('name', 'Name', 'required');
             $this->sub_category_model->update_sub_category();
-            redirect('categories');
-        }
+            redirect(base_url());
+        }*/
     }

@@ -21,6 +21,14 @@ class Post_model extends CI_Model{
         return $query->row_array();
     }
 
+    public function get_posts_as_same_subcategory($subcategory_id){
+        $this->db->select("*");
+        $this->db->from('posts');
+        $this->db->where('subcategory_id', $subcategory_id);
+        $query = $this->db->get()->result_array();
+        return $query;
+    }
+
     public function create_post(){
         //get the form values
         $data = array(
@@ -33,6 +41,12 @@ class Post_model extends CI_Model{
 
     public function delete_post($id){
         $this->db->where('id', $id);
+        $this->db->delete('posts');
+        return TRUE;
+    }
+
+    public function delete_posts_by_subcategory_id($subcategory_id){
+        $this->db->where('subcategory_id', $subcategory_id);
         $this->db->delete('posts');
         return TRUE;
     }
