@@ -1,4 +1,33 @@
 # codeigniter-forum-beadando
+<h3>Az applikáció eddig képes:</h3>
+<ul>
+	<li>Kategóriákat
+		<ul>
+			<li>létrehozni</li>
+			<li>megjeleníteni</li>
+			<li>módosítani</li>
+			<li>törölni</li>
+		</ul>
+	</li>
+	<li>
+		Alkategóriákat (Topicocat/subcategories)
+		<ul>
+			<li>létrehozni</li>
+			<li>megjeleníteni</li>
+			<li>módosítani</li>
+			<li>törölni</li>
+		</ul>
+	</li>
+	<li>
+		Posztokat
+		<ul>
+			<li>létrehozni</li>
+			<li>megjeleníteni</li>
+		</ul>
+	</li>
+	
+</ul>
+
 <h3>Követelmények</h3>
 <ol>
 	<li>Működő weboldal MVC keretrendszerben.</li>
