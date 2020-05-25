@@ -57,7 +57,7 @@ $route['categories'] = 'categories/index';
 $route['subcategories/edit/(:any)'] = 'subcategories/edit/$1';
 $route['subcategories/(:any)'] = 'subcategories/view/$1';
 
-$route['posts/create'] = 'posts/create';
+$route['posts/create/(:any)'] = 'posts/create/$1';
 $route['posts/update'] = 'posts/update';
 $route['posts/topic'] = 'posts/topic/$1';
 $route['posts/(:any)'] = 'posts/view/$1';

@@ -29,10 +29,11 @@ class Post_model extends CI_Model{
         return $query;
     }
 
-    public function create_post(){
+    public function create_post($subcategory_id){
         //get the form values
         $data = array(
             //TODO: add user_id, category_id ...
+            'subcategory_id' => $subcategory_id,
             'body' => $this->input->post('body')
         );
 

@@ -6,7 +6,7 @@ if(isset($view_params)){
   echo $view_params;  
 }?>
 
-<?php echo form_open('posts/create'); ?>
+<?php echo form_open(); ?>
   <div class="form-group">
     <labe>Body</label>
     <textarea class="form-control" id="ckeditor" placeholder="Add Body" name="body"></textarea>

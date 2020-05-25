@@ -32,8 +32,7 @@
         public function topic($subcategory_id){
             $data['posts'] = $this->post_model->get_posts_as_same_subcategory($subcategory_id);
             $data['subcategory'] = $this->sub_category_model->get_sub_categories($subcategory_id);
-            $data['title'] = '<strong>Topic</strong></br>'.$data['subcategory']['name'].'<a class="btn btn-outline-success float-right" 
-            href="'.site_url('/posts/create').'">Answer</a>';
+            $data['title'] = '<strong>Topic</strong></br>';
 
             $this->load->view('templates/header');
             $this->load->view('posts/topic', $data);
@@ -41,7 +40,7 @@
         }
 
         //TODO: csak akkor lehessen posztot készíteni ha be van jelentkezve
-        public function create(){
+        public function create($subcategory_id){
             $data['title'] = 'Create Post';
 
             //Validation rules
@@ -53,8 +52,8 @@
                 $this->load->view('templates/footer');
             } else {
                 //this is submitted
-                $this->post_model->create_post();
-                redirect(base_url('posts'));
+                $this->post_model->create_post($subcategory_id);
+                redirect(base_url('posts/topic/'.$subcategory_id));
             }
         }
 

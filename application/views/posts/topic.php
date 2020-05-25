@@ -1,5 +1,7 @@
 <div class="mb-3">
-    <h2><?php echo $title; ?></h2>
+    <?php $create_link = base_url('posts/create/').$subcategory['id']; ?>
+
+    <h2><?php echo $title.$subcategory['name'].'<a class="btn btn-outline-success float-right" href="'.$create_link.'">Answer</a>'?></h2>
     <small class="post-date">Created on: <?php echo $subcategory['created_at']; ?></small>
     <!-- Edit -->
     <a class="btn btn-outline-warning d-inline-block float-left" href="<?php echo base_url('subcategories/edit/'.$subcategory['id']); ?>">Edit</a>
