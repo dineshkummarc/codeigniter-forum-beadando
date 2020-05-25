@@ -7,6 +7,7 @@
 			<li>saját validációs szabály regisztrációnál</li>
 			<li>bejelentkezés</li>
 			<li>regisztráció</li>
+			<li>kiejelentkezés</li>
 		</ul>
 	</li>
 	<li>Kategóriákat
