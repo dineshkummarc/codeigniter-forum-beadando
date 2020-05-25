@@ -36,7 +36,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>posts">Sign Up</a>
+                    <a class="nav-link" href="<?php echo base_url('users/login'); ?>">Log In</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo base_url('users/register'); ?>">Register<span class="sr-only">(current)</span></a>
@@ -50,6 +50,14 @@
             <!-- Registered -->
             <?php if($this->session->flashdata('user_registered')) : ?>
                 <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_registered').'</p>'; ?>
+            <?php endif; ?>
+            <!-- Logged in -->
+            <?php if($this->session->flashdata('user_login')) : ?>
+                <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_login').'</p>'; ?>
+            <?php endif; ?>
+            <!-- login_failed -->
+            <?php if($this->session->flashdata('login_failed')) : ?>
+                <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
             <?php endif; ?>
 
             <!-- Posts -->

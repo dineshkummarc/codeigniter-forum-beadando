@@ -27,6 +27,45 @@
             }
         }
 
+        public function login(){
+            $data['title'] = 'Sign In';
+
+            $this->form_validation->set_rules('username', 'Name', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+
+            if($this->form_validation->run() === FALSE){
+                $this->load->view('templates/header');
+                $this->load->view('users/login', $data);
+                $this->load->view('templates/footer');
+            } else {
+                //Get username
+                $username = $this->input->post('username');
+                //Get and encrypt the password
+                $password = md5($this->input->post('password'));
+
+                //Login user
+                $user_id = $this->user_model->login($username, $password);
+
+                if($user_id){
+                    //create session
+                    $user_data = array(){
+                        'user_id' => $user_id,
+                        'username' => $username,
+                        'logged_in' => TRUE
+                    };
+
+                    $this->session->set_userdata($user_data);
+                    //Set message
+                    $this->session->set_flashdata('user_login', 'You are now logged in');
+                    redirect('categories');
+                } else {
+                    //Set error message
+                    $this->session->set_flashdata('login_failed', 'Login is invalid');
+                    redirect('users/login');
+                }
+            }
+        }
+
         //Check if username exists
         function check_username_exists($username){
             $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
