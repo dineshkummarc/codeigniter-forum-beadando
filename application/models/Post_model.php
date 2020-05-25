@@ -12,13 +12,21 @@ class Post_model extends CI_Model{
             $this->db->from('posts');
             //JOIN
             //$this->db->join('table2', 'table1.id=table2.id')
-            $this->db->join('sub_categories', 'posts.subcategory_id = sub_categories.id');
+            $this->db->join('subcategories', 'posts.subcategory_id = subcategories.id');
             $query = $this->db->get();
             return $query->result_array();
         }
 
         $query = $this->db->get_where('posts', array('id' => $id));
         return $query->row_array();
+    }
+
+    public function get_all_posts(){
+        $this->db->select('*');
+        $this->db->from('posts');
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function get_posts_as_same_subcategory($subcategory_id){

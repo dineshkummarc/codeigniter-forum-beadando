@@ -2,12 +2,8 @@
     class Posts extends CI_Controller{
         public function index(){
             $data['title'] = 'Latest Posts';
-            
-            $data['posts'] = $this->post_model->get_posts();
-            
-            //Number of words shown / post in the pages/index view
-            $number_of_words = 60;
-            $data['number_of_words'] = $number_of_words;
+            $data['number_of_words'] = 60;
+            $data['posts'] = $this->post_model->get_all_posts();
 
             $this->load->view('templates/header');
             $this->load->view('posts/index', $data);
