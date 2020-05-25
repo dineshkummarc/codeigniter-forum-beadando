@@ -7,9 +7,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/bootswatch-sketchy-theme.min.css'); ?>" type="text/css">
         <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
         <!-- CKEditor -->
-        <!-- Link custom CSS -->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css'); ?>" media="all">
         <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js" charset="utf-8"></script>
+        <!-- Link custom CSS -->
+        <link href="<?php echo base_url('assets/css/style.css').'?'.time();?>" rel="stylesheet" type="text/css" >
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">

@@ -1,3 +1,5 @@
+<?php $number_of_words = 175; ?>
+
 <h2><?= $title ?></h2>
 <?php foreach($categories as $category) : ?>
     <div>
@@ -8,7 +10,7 @@
                 <img class="category-thumb" src="<?php echo site_url(); ?>assets/images/categories/<?php echo $category['photo']; ?>" alt="">
             </div>
             <div class="col-md-9">
-                <?php echo $category['description']; ?>
+                <?php echo word_limiter($category['description'], $number_of_words); ?>
             </div>
         </div>
         <p><a class="btn btn-outline-info" href="<?php echo site_url('/categories/'.$category['id']); ?>">Show Sub Categories</a></p>

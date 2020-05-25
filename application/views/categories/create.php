@@ -1,5 +1,9 @@
 <h2><?= $title; ?></h2>
-
+<?php 
+  if(isset($errors)){
+    echo $errors;
+  }
+?>
 <?php echo validation_errors(); ?>
 
 <?php echo form_open_multipart('categories/create'); ?>

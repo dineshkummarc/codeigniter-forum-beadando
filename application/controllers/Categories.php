@@ -47,31 +47,46 @@
                 $config['upload_path'] = './assets/images/categories/';
                 $config['allowed_types'] = 'jpg|jpeg|gif|png';
                 $config['max_size'] = 2048;
-                $config['max_width'] = 2000;
-                $config['max_height'] = 2000;
+                $config['max_width'] = 1024;
+                $config['max_height'] = 1024;
                 $config['overwrite'] = FALSE;
+                $config['file_ext_tolower'] = TRUE;
                 
                 $this->load->library('upload', $config);
-                if(!$this->upload->do_upload('categoryimage')){
-                    $view_params = [
-                        'errors' => $this->upload->display_errors()
-                      ];
-                      $this->load->view('categories/create', $view_params);
-                    
+
+                //Ha nem akar feltölteni képet
+                if(empty($_FILES['categoryimage']['name'])){
                     $post_image = 'noimage.jpg';
-                }else {
+                }
+                //Ha valami baj van a feltöltéssel
+                elseif(!$this->upload->do_upload('categoryimage')){
+                    $data['errors'] = $this->upload->display_errors();
+                    $this->load->view('templates/header');
+                    $this->load->view('categories/create', $data);
+                    $this->load->view('templates/footer');
+                }
+                //ha minden rendben
+                else {
                     $data = array('upload_data' => $this->upload->data());
                     $post_image = $_FILES['categoryimage']['name'];
+                    $this->main_category_model->create_main_category($post_image);
+                    //TODO: redirect to the new categories view page
+                    redirect('categories');
                 }
-
-                $this->main_category_model->create_main_category($post_image);
-                //TODO: redirect to the new categories view page
-                redirect('categories');
             }
         }
 
         //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd a poszt
         public function delete($id){
+            //FIXME:
+            //Get the image location
+            $record = $this->main_category_model->get_main_categories($id);
+            $image_name = $record['photo'];
+            //Delete image if not noimage.jpg
+            if($image_name != 'noimage.jpg'){
+                $this->load->helper("file");
+                delete_files(base_url('assets/images/categories/'.$image_name));
+            }
             $this->main_category_model->delete_main_category($id);
             redirect('categories');
         }

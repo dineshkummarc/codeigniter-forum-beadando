@@ -1,6 +1,7 @@
-<h2><?php echo $title; ?></h2>
+<h2>Category Name: </br><?php echo $title; ?></h2>
 <small class="post-date">Created on: <?php echo $main_category['created_at']; ?></small>
 <div class="post-body">
+    <h4>Description</h4>
     <?php echo $main_category['description'];?>
 </div>
 
@@ -13,6 +14,7 @@
 <hr>
 
 <!-- TODO: list sub categories -->
+<h3>Sub Categories</h3>
 <?php var_dump($sub_categories);?>
 <?php if(!empty($sub_categories)) : ?>
     <ul>
