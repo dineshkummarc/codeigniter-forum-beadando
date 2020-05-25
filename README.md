@@ -2,6 +2,13 @@
 <h3>Az applikáció eddig képes:</h3>
 <ul>
 	<li>Input mezők validálása</li>
+	<li>Felhasználók
+		<ul>
+			<li>saját validációs szabály regisztrációnál</li>
+			<li>bejelentkezés</li>
+			<li>regisztráció</li>
+		</ul>
+	</li>
 	<li>Kategóriákat
 		<ul>
 			<li>létrehozásnál fényképet lehet feltölteni, amit validálunk</li>

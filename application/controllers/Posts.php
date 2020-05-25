@@ -48,6 +48,10 @@
                 $this->load->view('templates/footer');
             } else {
                 //this is submitted
+
+                //set message
+                $this->session->set_flashdata('post_created', 'Your post has been created!');
+
                 $this->post_model->create_post($subcategory_id);
                 redirect(base_url('posts/topic/'.$subcategory_id));
             }
@@ -57,6 +61,11 @@
         public function delete($id){
             $this->post_model->delete_post($id);
             $subcategory_id = $this->input->post('subcategory_id');
+
+            //set message
+            $this->session->set_flashdata('post_deleted', 'Your post has been deleted!');
+
+
             redirect(base_url('posts/topic/').$subcategory_id);
         }
 
@@ -70,14 +79,17 @@
 
             $data['title'] = 'Edit Post';
 
+            //set message
+            $this->session->set_flashdata('post_updated', 'Your post has been updated!');
+
             $this->load->view('templates/header');
             $this->load->view('posts/edit', $data);
             $this->load->view('templates/footer');
         }
 
         //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
-        public function update(){
+        /*public function update(){
             $this->post_model->update_post();
             redirect('posts');
-        }
+        }*/
     }

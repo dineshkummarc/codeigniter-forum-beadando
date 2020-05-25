@@ -20,6 +20,9 @@
             //Az összes ehhez tartozó posztot is kitörli
             $this->post_model->delete_posts_by_subcategory_id($id);
 
+            //set message
+            $this->session->set_flashdata('subcategory_deleted', 'Your topic has been deleted!');
+
             redirect('categories');
         }
 
@@ -38,6 +41,8 @@
 
             if($this->form_validation->run() == TRUE){
                 $this->sub_category_model->update_sub_category( $id, $this->input->post('name'));
+                //set message
+                $this->session->set_flashdata('subcategory_updated', 'Your topic has been updated!');
                 redirect(base_url('posts/topic/'.$id));
             } else {
                 $view_params['subcategory'] = $record;

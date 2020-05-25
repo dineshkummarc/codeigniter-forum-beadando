@@ -66,6 +66,10 @@
                 }
                 $this->main_category_model->create_main_category($post_image);
                 //TODO: redirect to the new categories view page
+
+                //set message
+                $this->session->set_flashdata('category_created', 'Your category has been created!');
+
                 redirect('categories');
             }
         }
@@ -76,6 +80,9 @@
             if($this->input->post('submit')){
                 // a validáció sikeres
                 $this->sub_category_model->create_sub_category($maincategory_id, $this->input->post('name'));
+
+                //set message
+                $this->session->set_flashdata('subcategory_created', 'Your topic has been created!');
 
                 redirect('categories/'.$maincategory_id);
             }
@@ -93,6 +100,10 @@
                 delete_files(base_url('assets/images/categories/'.$image_name));
             }
             $this->main_category_model->delete_main_category($id);
+
+            //set message
+            $this->session->set_flashdata('category_deleted', 'Your category has been deleted!');
+
             redirect('categories');
         }
 
@@ -105,6 +116,9 @@
             }
 
             $data['title'] = 'Edit Category';
+
+            //set message
+            $this->session->set_flashdata('category_edited', 'Your category has been updated!');
 
             $this->load->view('templates/header');
             $this->load->view('categories/edit', $data);
