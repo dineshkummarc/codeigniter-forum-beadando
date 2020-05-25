@@ -43,7 +43,7 @@
 
             //Validation rules
             $this->form_validation->set_rules('body', 'Body', 'required');
-
+            $data['title'] = 'Create Post';
             if($this->form_validation->run() === FALSE){
                 $this->load->view('templates/header');
                 $this->load->view('posts/create', $data);
