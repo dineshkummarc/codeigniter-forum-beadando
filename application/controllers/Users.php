@@ -48,11 +48,11 @@
 
                 if($user_id){
                     //create session
-                    $user_data = array(){
+                    $user_data = array(
                         'user_id' => $user_id,
                         'username' => $username,
                         'logged_in' => TRUE
-                    };
+                    );
 
                     $this->session->set_userdata($user_data);
                     //Set message
@@ -66,8 +66,19 @@
             }
         }
 
+        public function logout(){
+            // Unset user data
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('username');
+
+            //Set message
+            $this->session->set_flashdata('user_loggedout', 'You are now logged out');
+            redirect('users/login');
+        }
+
         //Check if username exists
-        function check_username_exists($username){
+        public function check_username_exists($username){
             $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
 
             if($this->user_model->check_username_exists($username)){
@@ -78,7 +89,7 @@
         }
 
         //Check if email exists
-        function check_email_exists($email){
+        public function check_email_exists($email){
             $this->form_validation->set_message('check_email_exists', 'That email is taken. Please choose a different one');
 
             if($this->user_model->check_email_exists($email)){

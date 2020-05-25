@@ -35,12 +35,21 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('users/login'); ?>">Log In</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo base_url('users/register'); ?>">Register<span class="sr-only">(current)</span></a>
-                </li>
+
+                <?php if(!$this->session->userdata('logged_in')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('users/login'); ?>">Log In</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?php echo base_url('users/register'); ?>">Register<span class="sr-only">(current)</span></a>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if($this->session->userdata('logged_in')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('users/logout'); ?>">Logout</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         </nav>
@@ -58,6 +67,10 @@
             <!-- login_failed -->
             <?php if($this->session->flashdata('login_failed')) : ?>
                 <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+            <?php endif; ?>
+            <!-- Logged out -->
+            <?php if($this->session->flashdata('user_loggedout')) : ?>
+                <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
             <?php endif; ?>
 
             <!-- Posts -->
