@@ -14,14 +14,30 @@
 <hr>
 
 <!-- TODO: list sub categories -->
-<h3>Sub Categories</h3>
-<?php var_dump($sub_categories);?>
-<?php if(!empty($sub_categories)) : ?>
-    <ul>
-        <?php foreach($sub_categories as $sub_category) : ?>
-            <li><a href=""><?php echo $sub_category['name'];?></a></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+<div>
+    <h3>Sub Categories</h3>
+    <?php echo validation_errors(); ?>
+    <!-- Insert sub categories -->
+    <?php echo form_open_multipart('/categories/create_subcategory/'.$main_category['id']); ?>
+    <div class="form-group">
+        <div class="row">
+            <input  type="text" class="form-control col-md-9 mr-5" name="name" placeholder="Add Subcategory Name">
+            <input type="submit" name="submit" value="Submit" class="btn btn-outline-success col-md-2"/>
+        </div>
+    </div>
+    <?php echo form_close();?>
+    
+    <!-- List the subcategories -->
+    <?php if(!empty($sub_category)) : ?>
+        <ul>
+            <?php foreach($sub_category as $sub_category) : ?>
+                <?php $link = base_url().'subcategories/'.$sub_category['id']; ?>
+                <li>
+                    <a href="<?php echo $link; ?>"><?php echo $sub_category['name']; echo " (number of comments)"; ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>
 
 

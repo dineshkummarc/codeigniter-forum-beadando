@@ -14,16 +14,14 @@
         public function view($id = NULL){
             $data['main_category'] = $this->main_category_model->get_main_categories($id);
             // TODO: list sub categories
-            $data['sub_categories'] = $this->sub_category_model->get_sub_categories_by_parent_category_id($id);
+            $data['sub_category'] = $this->sub_category_model->get_sub_categories($id);
+            $data['sub_category'] = $this->sub_category_model->get_sub_categories($id);
             
             if(empty($data['main_category'])){
                 show_404();
             }
 
-            //TODO: finish it
-            $link = site_url('/subcategories/create/').$id;
-            $data['title'] = $data['main_category']['name'].'<a class="btn btn-outline-success float-right" 
-            href="'.$link.'">Create Sub-Category</a>';
+            $data['title'] = $data['main_category']['name'];
 
             $this->load->view('templates/header');
             $this->load->view('categories/view', $data);
@@ -72,6 +70,31 @@
                     $this->main_category_model->create_main_category($post_image);
                     //TODO: redirect to the new categories view page
                     redirect('categories');
+                }
+            }
+        }
+
+        //TODO: csak bejelentkezve
+        //Sub Category létrehozása egy Main Category view nézetében
+        public function create_subcategory($maincategory_id){
+            if($this->input->post('submit')){
+                // valaki rákattintott a submit-ra, az adatokat validálni kell
+                $this->load->library('form_validation');
+                // validációs szabályok beállítása 
+                $this->form_validation->set_rules('name', 'Name', 'required');
+    
+                if($this->form_validation->run() === FALSE){
+                    //FIXME: KIIRATNI AZ ERRORT
+                    //Valamiért mindig a /categories/create_subcategory/14 be akar bedobni ....
+                    //$this->load->view('templates/header');
+                    //$this->load->view(base_url('categories/'.$maincategory_id));
+                    //$this->load->view('templates/footer');
+                    redirect('categories/'.$maincategory_id);
+                } else{
+                    // a validáció sikeres
+                    $this->sub_category_model->create_sub_category($maincategory_id, $this->input->post('name'));
+    
+                    redirect('categories/'.$maincategory_id);
                 }
             }
         }

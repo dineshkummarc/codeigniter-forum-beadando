@@ -5,34 +5,24 @@ class Sub_category_model extends CI_Model{
         $this->load->database();
     }
 
-    public function get_sub_categories($id = FALSE){
-        if($id == FALSE){
+    public function get_sub_categories($id){
+        if(empty($id)){
             $this->db->order_by('name', 'ASC');
             $query = $this->db->get('sub_categories');
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('sub_categories', array('id' => $id));
-        return $query->row_array();
-    }
-
-    //FIXME: throw error
-    public function get_sub_categories_by_parent_category_id($id = FALSE){
-        if($id == FALSE){
-            $this->db->order_by('name', 'ASC');
-            $query = $this->db->get('sub_categories');
-            return $query->result_array();
-        }
-
-        $query = $this->db->get_where('sub_categories', array('maincategory_id' => $id));
-        return $query->row_array();
+        $this->db->select("*");
+        $this->db->from('sub_categories');
+        $this->db->where('maincategory_id', $id);
+        $query = $this->db->get()->result_array();// lekérdezési objektum
+        return $query;
     }
 
     //TODO: csak belépett felhasználó
-    public function create_sub_category($maincategory_id){
-        //get the form values
+    public function create_sub_category($maincategory_id, $name){
         $data = array(
-            'name' => $this->input->post('name'),
+            'name' => $name,
             'maincategory_id' => $maincategory_id
         );
 

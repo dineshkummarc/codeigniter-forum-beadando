@@ -14,24 +14,6 @@
             $this->load->view('templates/footer');
         }
 
-        //TODO: csak belépett felhasználó
-        public function create(){
-            $data['title'] = 'Create Sub-Category';
-
-            //Validation rules
-            $this->form_validation->set_rules('name', 'Name', 'required');
-
-            if($this->form_validation->run() === FALSE){
-                $this->load->view('templates/header');
-                $this->load->view('subcategories/create', $data);
-                $this->load->view('templates/footer');
-            } else {
-                $this->sub_category_model->create_sub_category();
-                //TODO: az elkészülés lapjára!
-                redirect('categories');
-            }
-        }
-
         //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd az alkategóra
         public function delete($id){
             $this->sub_category_model->delete_sub_category($id);
