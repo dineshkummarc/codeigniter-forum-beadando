@@ -1,8 +1,10 @@
 # codeigniter-forum-beadando
 <h3>Az applikáció eddig képes:</h3>
 <ul>
+	<li>Input mezők validálása</li>
 	<li>Kategóriákat
 		<ul>
+			<li>létrehozásnál fényképet lehet feltölteni, amit validálunk</li>
 			<li>létrehozni</li>
 			<li>megjeleníteni</li>
 			<li>módosítani</li>
