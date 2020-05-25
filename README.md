@@ -23,6 +23,7 @@
 		<ul>
 			<li>létrehozni</li>
 			<li>megjeleníteni</li>
+			<li>törölni</li>
 		</ul>
 	</li>
 	
