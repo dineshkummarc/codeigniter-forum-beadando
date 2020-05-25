@@ -35,9 +35,11 @@
             $this->load->view('templates/footer');
         }
 
-        //TODO: csak akkor lehessen posztot készíteni ha be van jelentkezve
         public function create($subcategory_id){
-            $data['title'] = 'Create Post';
+            //check login
+            if(!$this->session->userdata('logged_in')){
+                redirect('users/login');
+            }
 
             //Validation rules
             $this->form_validation->set_rules('body', 'Body', 'required');

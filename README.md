@@ -31,7 +31,7 @@
 	<li>
 		Posztokat
 		<ul>
-			<li>létrehozni</li>
+			<li>létrehozni - csak akkor ha be van jelentkezve</li>
 			<li>megjeleníteni</li>
 			<li>törölni</li>
 		</ul>
