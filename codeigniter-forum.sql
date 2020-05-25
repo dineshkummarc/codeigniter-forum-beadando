@@ -27,7 +27,7 @@ CREATE TABLE `codeigniter-forum`.`categories` (
 ENGINE = InnoDB;
 
 -- Create sub_categories table
-CREATE TABLE `codeigniter-forum`.`sub_categories` 
+CREATE TABLE `codeigniter-forum`.`subcategories` 
 ( 
      `id` INT NOT NULL AUTO_INCREMENT ,
      `user_id` INT NOT NULL, 
