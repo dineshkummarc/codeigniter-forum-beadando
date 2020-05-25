@@ -4,6 +4,17 @@ GRANT ALL PRIVILEGES ON *.* TO 'codeigniter-forum-user'@'localhost' REQUIRE NONE
 MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 GRANT ALL PRIVILEGES ON `codeigniter-forum`.* TO 'codeigniter-forum-user'@'localhost';
 
+-- Create users table
+CREATE TABLE `codeigniter-forum`.`users` (
+      `id` INT NOT NULL AUTO_INCREMENT , 
+      `nick_name` VARCHAR(255) NOT NULL , 
+      `first_name` VARCHAR(255) NOT NULL , 
+      `last_name` VARCHAR(255) NOT NULL , 
+      `email` VARCHAR(255) NOT NULL , 
+      `password` VARCHAR(255) NOT NULL , 
+      `register_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+      PRIMARY KEY (`id`)) 
+ENGINE = InnoDB;
 
 -- Create posts table
 CREATE TABLE `codeigniter-forum`.`posts` (
