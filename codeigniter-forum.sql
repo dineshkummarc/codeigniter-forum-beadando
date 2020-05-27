@@ -67,3 +67,11 @@ ENGINE = InnoDB;
 
 -- Insert categories
 INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES (NULL, 'Business', current_timestamp()), (NULL, 'Technology', current_timestamp())
+
+-- INSERT USERS
+INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `register_date`) 
+VALUES ('1', 'admin', '', '', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', current_timestamp()), 
+(NULL, 'jondoe', 'jon', 'doe', 'jon@doe.com', '6934c4368e77e0a4e6008ae5c16fcd5d', current_timestamp())
+-- #1 username: admin | password: admin
+-- #2 username: jondoe | password: jondoe
+
