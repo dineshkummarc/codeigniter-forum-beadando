@@ -29,7 +29,6 @@
 			</li>
 			<li>codeigniter-forum-beadando/categories: csak akkor jelenik meg a Create Category link, ha adminként vagyunk bejelentkezve </li>
 			<li>codeigniter-forum-beadando/categories/$id: csak akkor jelenik meg az edit és a delete, ha adminként vagyunk bejelentkezve  </li>
-
 		</ul>
 	</li>
 </ul>
