@@ -12,7 +12,6 @@
 					<li>update: csak admin</li>
 				</ul>
 			</li>
-
 			<li>Subcategory
 				<ul>
 					<li>delete: csak user vagy admin</li>
@@ -20,7 +19,6 @@
 					<li>edit: csak user vagy admin</li>
 				</ul>
 			</li>
-
 			<li>Posts
 				<ul>
 					<li>create: csak belépve</li>
@@ -29,7 +27,6 @@
 					<li>delete : csak tulaj vagy admin</li>
 				</ul>
 			</li>
-
 			<li>codeigniter-forum-beadando/categories: csak akkor jelenik meg a Create Category link, ha adminként vagyunk bejelentkezve </li>
 			<li>codeigniter-forum-beadando/categories/$id: csak akkor jelenik meg az edit és a delete, ha adminként vagyunk bejelentkezve  </li>
 
