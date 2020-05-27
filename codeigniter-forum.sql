@@ -29,7 +29,8 @@ ENGINE = InnoDB;
 
 -- Create categories table
 CREATE TABLE `codeigniter-forum`.`categories` ( 
-     `id` INT NOT NULL AUTO_INCREMENT , 
+     `id` INT NOT NULL AUTO_INCREMENT ,
+     `user_id` INT NOT NULL, 
      `name` VARCHAR(100) NOT NULL , 
      `description` TEXT NOT NULL,
      `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 

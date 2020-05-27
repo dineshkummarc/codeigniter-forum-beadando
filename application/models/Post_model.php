@@ -5,6 +5,7 @@ class Post_model extends CI_Model{
         $this->load->database();
     }
 
+    //Get posts for 
     public function get_posts($id = FALSE){
         if($id == FALSE){
             //TODO: utolsó bejegyzést felülre?
@@ -13,6 +14,7 @@ class Post_model extends CI_Model{
             //JOIN
             //$this->db->join('table2', 'table1.id=table2.id')
             $this->db->join('subcategories', 'posts.subcategory_id = subcategories.id');
+            $this->db->order_by('posts.created_at', 'DESC');
             $query = $this->db->get();
             return $query->result_array();
         }
@@ -21,15 +23,7 @@ class Post_model extends CI_Model{
         return $query->row_array();
     }
 
-    public function get_all_posts(){
-        $this->db->select('*');
-        $this->db->from('posts');
-        $this->db->order_by('created_at', 'DESC');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
-    public function get_posts_as_same_subcategory($subcategory_id){
+    public function get_posts_from_same_subcategory($subcategory_id){
         $this->db->select("*");
         $this->db->from('posts');
         $this->db->where('subcategory_id', $subcategory_id);
@@ -40,7 +34,8 @@ class Post_model extends CI_Model{
     public function create_post($subcategory_id){
         //get the form values
         $data = array(
-            //TODO: add user_id, category_id ...
+            //TODO: add parent_post_id
+            'user_id' => $this->session->userdata('user_id'),
             'subcategory_id' => $subcategory_id,
             'body' => $this->input->post('body')
         );
@@ -62,7 +57,6 @@ class Post_model extends CI_Model{
 
     public function update_post(){
         $data = array(
-            //TODO: add user_id, category_id ...
             'title' => $this->input->post('title'),
             'body' => $this->input->post('body')
         );

@@ -1,6 +1,20 @@
+<?php 
+    // ha nem vagyok bejelentkezve és úgy akarok kategóriát létrehozni
+    // akkor átnavigál a loginra és onnan vissza navigál engem ide ennek a segítségével
+    $this->session->set_userdata('redirected_from', base_url(uri_string()));
+?>
+
 <?php $number_of_words = 175; ?>
 
-<h2><?= $title ?></h2>
+<h2> 
+    <?= $title; ?>
+    <?php 
+        if($this->session->userdata('user_id') == ADMIN_ID) {
+            echo '<a class="btn btn-outline-success float-right" href="'.site_url('/categories/create').'">Create Category</a>';
+        }
+    ?>
+</h2>
+
 <?php foreach($categories as $category) : ?>
     <div>
         <h3><?php echo $category['name']; ?></h3>

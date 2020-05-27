@@ -10,6 +10,8 @@
         <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js" charset="utf-8"></script>
         <!-- Link custom CSS -->
         <link href="<?php echo base_url('assets/css/style.css').'?'.time();?>" rel="stylesheet" type="text/css" >
+        <!-- Link custom.js -->
+        <script src="<?php echo base_url('assets/js/custom.js').'?'.time();?>"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -56,6 +58,10 @@
 
         <div class="container">
             <!-- Flash messages -->
+            <!-- Permission Denied -->
+            <?php if($this->session->flashdata('permission_denied')) : ?>
+                <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('permission_denied').'</p>'; ?>
+            <?php endif; ?>
             <!-- Registered -->
             <?php if($this->session->flashdata('user_registered')) : ?>
                 <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_registered').'</p>'; ?>
@@ -70,7 +76,7 @@
             <?php endif; ?>
             <!-- Logged out -->
             <?php if($this->session->flashdata('user_loggedout')) : ?>
-                <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
+                <?php echo '<p class="alert alert-warning">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
             <?php endif; ?>
 
             <!-- Posts -->
@@ -101,7 +107,7 @@
 
             <!-- Subcategories -->
             <?php if($this->session->flashdata('subcategory_created')) : ?>
-                <?php echo '<p class="alert alert-success">'.$this->session->flashdata('post_created').'</p>'; ?>
+                <?php echo '<p class="alert alert-success">'.$this->session->flashdata('subcategory_created').'</p>'; ?>
             <?php endif; ?>
 
             <?php if($this->session->flashdata('subcategory_updated')) : ?>

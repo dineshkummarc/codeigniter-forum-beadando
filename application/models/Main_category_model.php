@@ -16,11 +16,10 @@ class Main_category_model extends CI_Model{
         return $query->row_array();
     }
 
-    //TODO: csak admin hozhatja létre
     public function create_main_category($post_image){
         //get the form values
         $data = array(
-            //TODO: ki hozhat létre?
+            'user_id' => $this->session->userdata('user_id'),
             'name' => $this->input->post('name'),
             'description' => $this->input->post('description'),
             'photo' => $post_image
@@ -35,10 +34,10 @@ class Main_category_model extends CI_Model{
         return TRUE;
     }
 
-    //TODO: csak admin módosíthatja
     public function update_main_category(){
         $data = array(
-            //TODO: add user_id, category_id ...
+            // ha kéne hogy utoljára ki módosította
+            //'user_id' => $this->session->userdata('user_id');
             'name' => $this->input->post('name'),
             'description' => $this->input->post('description')
         );

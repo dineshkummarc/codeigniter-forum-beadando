@@ -14,8 +14,20 @@
             $this->load->view('templates/footer');
         }
 
-        //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd az alkategóra
         public function delete($id){
+            //csak akkor lehessen törölni ha admin vagy, vagy ha tiéd az alkategóra
+            if($this->session->userdata('user_id') != ADMIN_ID && 
+                 $this->session->userdata('user_id') != $this->sub_category_model->get_sub_categories($id)['user_id']){
+
+                $this->session->set_flashdata('permission_denied', 'Permission denied!');
+
+                if($this->session->has_userdata('redirected_from')){
+                    redirect($this->session->userdata('redirected_from'));
+                } else {
+                    redirect(base_url('home'));
+                }
+            }
+
             $this->sub_category_model->delete_sub_category($id);
             //Az összes ehhez tartozó posztot is kitörli
             $this->post_model->delete_posts_by_subcategory_id($id);
@@ -26,7 +38,6 @@
             redirect('categories');
         }
 
-        //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
         public function edit($id =NULL){
             if($id == NULL){
                 show_error('A szerkesztéshez hiáynzik az id!');
@@ -34,7 +45,18 @@
 
             $record = $this->sub_category_model->get_sub_categories($id);
 
-            //$data['subcategories'] = $this->sub_category_model->get_sub_categories($id);
+            //csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
+            if($this->session->userdata('user_id') != ADMIN_ID && 
+                 $this->session->userdata('user_id') != $record['user_id']){
+
+                $this->session->set_flashdata('permission_denied', 'Permission denied!');
+
+                if($this->session->has_userdata('redirected_from')){
+                    redirect($this->session->userdata('redirected_from'));
+                } else {
+                    redirect(base_url('home'));
+                }
+            }
 
             $this->load->library('form_validation');
             $this->form_validation->set_rules('name','Name','required');
@@ -53,11 +75,4 @@
                 $this->load->view('templates/footer');
             }
         }
-
-        //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
-        /*public function update(){
-            $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->sub_category_model->update_sub_category();
-            redirect(base_url());
-        }*/
     }

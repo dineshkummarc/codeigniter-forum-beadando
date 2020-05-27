@@ -1,8 +1,7 @@
 <?php
     class Categories extends CI_Controller{
         public function index(){
-            $data['title'] = 'Categories <a class="btn btn-outline-success float-right" 
-            href="'.site_url('/categories/create').'">Create Category</a>';
+            $data['title'] = 'Categories';
             
             $data['categories'] = $this->main_category_model->get_main_categories();
 
@@ -26,8 +25,14 @@
             $this->load->view('templates/footer');
         }
 
-        //TODO: csak admin
         public function create(){
+            //Check login
+            $this->check_login();
+            if($this->session->userdata('user_id') != ADMIN_ID){
+                $this->session->set_flashdata('permission_denied', 'Permission denied!');
+                redirect(base_url('home'));
+            }
+
             $data['title'] = 'Create Category';
 
             //Validation rules
@@ -74,9 +79,11 @@
             }
         }
 
-        //TODO: csak bejelentkezve
         //Sub Category létrehozása egy Main Category view nézetében
         public function create_subcategory($maincategory_id){
+            //Check login
+            $this->check_login();
+
             if($this->input->post('submit')){
                 // a validáció sikeres
                 $this->sub_category_model->create_sub_category($maincategory_id, $this->input->post('name'));
@@ -88,8 +95,15 @@
             }
         }
 
-        //TODO: csak akkor lehessen törölni ha admin vagy, vagy ha tiéd a poszt
         public function delete($id){
+            //Check login
+            $this->check_login();
+
+            //Check Admin
+            if($this->session->userdata('user_id') != ADMIN_ID){
+                $this->session->set_flashdata('permission_denied', 'Permission denied!');
+                redirect(base_url('categories'));
+            }
             //FIXME:
             //Get the image location
             $record = $this->main_category_model->get_main_categories($id);
@@ -107,8 +121,15 @@
             redirect('categories');
         }
 
-        //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
         public function edit($id){
+            $this->check_login();
+            //csak akkor lehessen módosítani ha admin vagy
+            if($this->session->userdata('user_id') != ADMIN_ID){
+                $this->session->set_flashdata('permission_denied', 'Permission denied!');
+
+                redirect(base_url('home'));
+            }
+
             $data['categories'] = $this->main_category_model->get_main_categories($id);
             
             if(empty($data['categories'])){
@@ -125,10 +146,22 @@
             $this->load->view('templates/footer');
         }
 
-        //TODO: csak akkor lehessen módosítani ha admin vagy, vagy ha tiéd a poszt
         public function update(){
+            $this->check_login();
+            //csak akkor lehessen módosítani ha admin vagy
+            if($this->session->userdata('user_id') != ADMIN_ID){
+                $this->session->set_flashdata('permission_denied', 'Permission denied!');
+                redirect(base_url('home'));
+            }
+            
             $this->main_category_model->update_main_category();
-            //TODO: redirect to the edited categories view page
+            
             redirect('categories');
+        }
+
+        public function check_login(){
+            if(!$this->session->userdata('logged_in')){
+                redirect('users/login');
+            }
         }
     }

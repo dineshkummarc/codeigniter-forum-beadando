@@ -1,15 +1,17 @@
 <h2>Category Name: </br><?php echo $title; ?></h2>
-<small class="post-date">Created on: <?php echo $main_category['created_at']; ?></small>
 <div class="post-body">
     <h4>Description</h4>
     <?php echo $main_category['description'];?>
+    <small class="post-date">Created on: <?php echo $main_category['created_at']; ?></small>
 </div>
 
-<!-- TODO: if admin show else hide -->
-<a class="btn btn-outline-warning float-left" href="edit/<?php echo $main_category['id']; ?>">Edit</a>
-<?php echo form_open('/categories/delete/'.$main_category['id']); ?>
-<input type="submit" value="Delete" class="btn btn-outline-danger">
-<?php echo form_close(); ?>
+<!-- if admin show else hide -->
+<?php if($this->session->userdata('user_id') == ADMIN_ID) : ?>
+    <a class="btn btn-outline-warning float-left" href="edit/<?php echo $main_category['id']; ?>">Edit</a>
+    <?php echo form_open('/categories/delete/'.$main_category['id']); ?>
+    <input type="submit" value="Delete" class="btn btn-outline-danger">
+    <?php echo form_close(); ?>
+<?php endif; ?>
 
 <hr>
 

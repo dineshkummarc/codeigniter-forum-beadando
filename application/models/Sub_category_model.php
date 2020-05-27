@@ -13,9 +13,9 @@ class Sub_category_model extends CI_Model{
         return $query;
     }
 
-    public function get_sub_categories($id){
+    public function get_sub_categories($id = FALSE){
         //Ha $id üres add vissza mindet
-        if(empty($id)){
+        if($id == FALSE){
             $this->db->order_by('name', 'ASC');
             $query = $this->db->get('subcategories');
             return $query->result_array();
@@ -37,6 +37,7 @@ class Sub_category_model extends CI_Model{
          }
 
         $data = array(
+            'user_id' => $this->session->userdata('user_id'),
             'name' => $name,
             'maincategory_id' => $maincategory_id
         );

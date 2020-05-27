@@ -57,7 +57,14 @@
                     $this->session->set_userdata($user_data);
                     //Set message
                     $this->session->set_flashdata('user_login', 'You are now logged in');
-                    redirect('categories');
+
+                    // Ha egy konkrét oldalról lett ide navigálva
+                    if($this->session->has_userdata('redirected_from')){
+                        redirect($this->session->userdata('redirected_from'));
+                    } else {
+                        redirect('categories');
+                    }
+                    
                 } else {
                     //Set error message
                     $this->session->set_flashdata('login_failed', 'Login is invalid');

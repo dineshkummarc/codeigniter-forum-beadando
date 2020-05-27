@@ -1,5 +1,43 @@
 # codeigniter-forum-beadando
-<h3>Az applikáció eddig képes:</h3>
+<h3>Határidő után implementálva :</h3>
+<ul>
+	<li>05.27.
+		<ul>
+			<li>Category
+				<ul>
+					<li>create: csak admin</li>
+					<li>create subcategory : csak belépve</li>
+					<li>delete: csak admin</li>
+					<li>edit: csak admin</li>
+					<li>update: csak admin</li>
+				</ul>
+			</li>
+
+			<li>Subcategory
+				<ul>
+					<li>delete: csak user vagy admin</li>
+					<li>create: csak bejelentkezve</li>
+					<li>edit: csak user vagy admin</li>
+				</ul>
+			</li>
+
+			<li>Posts
+				<ul>
+					<li>create: csak belépve</li>
+					<li>edit: csak tulaj vagy admin VIEW NEM JÓ</li>
+					<li>update: csak tulaj vagy admin</li>
+					<li>delete : csak tulaj vagy admin</li>
+				</ul>
+			</li>
+
+			<li>codeigniter-forum-beadando/categories: csak akkor jelenik meg a Create Category link, ha adminként vagyunk bejelentkezve </li>
+			<li>codeigniter-forum-beadando/categories/$id: csak akkor jelenik meg az edit és a delete, ha adminként vagyunk bejelentkezve  </li>
+
+		</ul>
+	</li>
+</ul>
+
+<h3>Határidőig implementálva:</h3>
 <ul>
 	<li>Input mezők validálása</li>
 	<li>Felhasználók
