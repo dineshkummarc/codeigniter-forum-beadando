@@ -6,7 +6,11 @@ class Post_model extends CI_Model{
     }
 
     //Get posts for 
-    public function get_posts($id = FALSE){
+    public function get_posts($id = FALSE, $limit = FALSE, $offset = FALSE){
+        if($limit) {
+            $this->db->limit($limit, $offset);
+        }
+        
         if($id == FALSE){
             //TODO: utolsó bejegyzést felülre?
             $this->db->select('*');
@@ -23,7 +27,11 @@ class Post_model extends CI_Model{
         return $query->row_array();
     }
 
-    public function get_posts_from_same_subcategory($subcategory_id){
+    public function get_posts_from_same_subcategory($subcategory_id, $limit = FALSE, $offset = FALSE){
+        if($limit) {
+            $this->db->limit($limit, $offset);
+        }
+        
         $this->db->select("*");
         $this->db->from('posts');
         $this->db->where('subcategory_id', $subcategory_id);

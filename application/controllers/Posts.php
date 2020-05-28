@@ -7,13 +7,14 @@
             $config['per_page'] = 10;
             //localhost/appfolder/segment1/segment2/segment3
             $config['uri_segment'] = 3;
+            $config['attributes'] = array('class' => 'pagination-link');
 
             // Init Pagination
             $this->pagination->initialize($config);
 
             $data['title'] = 'Latest Posts';
             $data['number_of_words'] = 60;
-            $data['posts'] = $this->post_model->get_posts();
+            $data['posts'] = $this->post_model->get_posts(FALSE, $config['per_page'], $offset);
 
             $this->load->view('templates/header');
             $this->load->view('posts/index', $data);
@@ -32,8 +33,17 @@
             $this->load->view('templates/footer');
         }
 
-        public function topic($subcategory_id){
-            $data['posts'] = $this->post_model->get_posts_from_same_subcategory($subcategory_id);
+        public function topic($subcategory_id, $offset = 0){
+            // Pagination Config
+            $config['base_url'] = base_url().'posts/topic/'.$subcategory_id.'/';
+            $config['per_page'] = 5;
+            $config['total_rows'] = count($this->post_model->get_posts_from_same_subcategory($subcategory_id));
+            $config['uri_segment'] = 4;
+            $config['attributes'] = array('class' => 'pagination-link');
+            // Init Pagination
+            $this->pagination->initialize($config);
+
+            $data['posts'] = $this->post_model->get_posts_from_same_subcategory($subcategory_id, $config['per_page'], $offset);
             $data['subcategory'] = $this->sub_category_model->get_sub_categories($subcategory_id);
             $data['title'] = '<strong>Topic</strong></br>';
 

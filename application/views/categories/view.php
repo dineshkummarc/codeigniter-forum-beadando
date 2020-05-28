@@ -15,7 +15,7 @@
 
 <hr>
 
-<!-- TODO: list sub categories -->
+<!-- list sub categories -->
 <div>
     <h3>Topics</h3>
     <?php echo validation_errors(); ?>

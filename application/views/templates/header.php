@@ -26,14 +26,19 @@
                 <a class="nav-link" href="<?php echo base_url(); ?>">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo base_url(); ?>categories">Categories <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?php echo base_url('categories'); ?>">Categories <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>posts">Latest Posts</a>
+                <a class="nav-link" href="<?php echo base_url('posts'); ?>">Latest Posts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
+                <a class="nav-link" href="<?php echo base_url('about'); ?>">About</a>
             </li>
+            <?php if($this->session->userdata('user_id') == ADMIN_ID) : ?>
+                <li class="nav-item">
+                <a class="nav-link btn-admin-link" href="<?php echo base_url('admin'); ?>">ADMIN</a>
+            </li>
+            <?php endif; ?>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

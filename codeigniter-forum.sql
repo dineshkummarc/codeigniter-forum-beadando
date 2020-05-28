@@ -75,3 +75,7 @@ VALUES ('1', 'admin', '', '', 'admin@admin.com', '21232f297a57a5a743894a0e4a801f
 -- #1 username: admin | password: admin
 -- #2 username: jondoe | password: jondoe
 
+-- INSERT Subcategories
+
+-- INSERT Posts
+

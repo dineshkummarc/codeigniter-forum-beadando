@@ -1,6 +1,18 @@
 # codeigniter-forum-beadando
 <h3>Határidő után implementálva :</h3>
+
 <ul>
+	<li>05.28.
+		<ul>
+			<li>Posts - index (Latest Posts) - Pagination </li>
+			<li>Posts - posts/topic/$index - Pagination </li>
+			<li>Admin - minden csak admin engedéllyel
+				<ul>
+					<li>adatok megjelenítése</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
 	<li>05.27.
 		<ul>
 			<li>Category
