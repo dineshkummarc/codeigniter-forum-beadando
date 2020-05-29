@@ -2,6 +2,11 @@
 <h3>Határidő után implementálva :</h3>
 
 <ul>
+	<li>05.29</li>
+		<ul>
+			<li>A codeigniter-forum.sql -be raktam minta rekordokat amivel fel lehet tölteni az adatbázist</li>
+			<li>ELKEZDVE: ADMIN oldalról adatok letöltése CSV formátumban</li>
+		</ul>
 	<li>05.28.
 		<ul>
 			<li>Posts - index (Latest Posts) - Pagination </li>
