@@ -34,7 +34,7 @@ CREATE TABLE `codeigniter-forum`.`categories` (
      `name` VARCHAR(100) NOT NULL , 
      `description` TEXT NOT NULL,
      `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
-     `post_image` VARCHAR(250) NOT NULL,
+     `photo` VARCHAR(250) NOT NULL,
      PRIMARY KEY (`id`)) 
 ENGINE = InnoDB;
 
@@ -80,8 +80,50 @@ INSERT INTO `codeigniter-forum`.`users` (`id`, `username`, `first_name`, `last_n
 -- Dumping data for table `categories`
 --
 INSERT INTO `codeigniter-forum`.`categories` (`id`, `user_id`, `name`, `description`, `photo`, `created_at`) VALUES 
-('1', '1', 'Business', 'This is a category about business', 'noimage.jpg', current_timestamp()),
-('2', '2', 'Games', 'This is a category about games', 'images.jpg', TIMESTAMPADD(DAY, 1, current_timestamp()));
+('1', '1', 'Business', 'This is a category about business, Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Aliquam eget sem et sem pharetra vulputate. Donec ex ipsum, 
+venenatis ut nisl non, aliquet convallis justo. Praesent ac eros vitae nunc scelerisque egestas.
+Nunc vitae condimentum eros. Vivamus varius sem eu scelerisque lobortis. Donec at ipsum mattis, lobortis
+ quam nec, egestas augue. Donec ut consequat turpis, nec cursus neque. Vestibulum rhoncus tortor nunc,
+  non feugiat arcu sagittis in. Nam at quam vel urna posuere scelerisque. Aenean vitae ultrices dolor. 
+  Fusce bibendum molestie lacinia.
+
+Praesent ultricies cursus magna. Nullam aliquet ipsum vel tellus molestie congue. 
+Morbi lacinia pellentesque massa, finibus tincidunt nulla gravida vitae. Suspendisse 
+quis sagittis augue, et molestie elit. Vivamus pellentesque cursus magna eu suscipit. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam, est ut dictum tempor,
+ leo urna varius lorem, eget porta eros magna non purus. Curabitur eu diam eget metus vulputate commodo
+  vel eget augue. Nunc augue leo, convallis id fringilla nec, malesuada et nunc. Aenean fringilla erat nunc,
+   sed pretium leo pretium quis.
+
+Cras varius elit eget ullamcorper luctus. Pellentesque habitant morbi tristique senectus 
+et netus et malesuada fames ac turpis egestas. Morbi porta, tortor et aliquam pretium, 
+risus metus maximus orci, ut porttitor ex nibh at urna. Integer mollis, turpis a vehicula hendrerit, 
+purus velit dignissim urna, quis ultrices urna leo vel velit. Aliquam placerat lectus a cursus sollicitudin. 
+Proin fermentum odio eu placerat pretium. Suspendisse potenti. Duis fringilla posuere congue. Fusce quis nisi 
+non erat vestibulum imperdiet sed id augue. Suspendisse potenti. Ut semper nisi urna, vitae pulvinar arcu laoreet id. 
+Suspendisse massa massa, hendrerit in placerat a, volutpat non velit. Maecenas placerat diam eros, 
+sit amet aliquam mauris interdum id. Morbi et viverra sem, eget elementum sem.', 'noimage.jpg', current_timestamp()),
+
+('2', '2', 'Games', 'This is a category about games Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Aliquam eget sem et sem pharetra vulputate. 
+Donec ex ipsum, venenatis ut nisl non, aliquet convallis justo. Praesent ac eros 
+vitae nunc scelerisque egestas. Nunc vitae condimentum eros. Vivamus varius sem eu 
+scelerisque lobortis. Donec at ipsum mattis, lobortis quam nec, egestas augue. 
+Donec ut consequat turpis, nec cursus neque. Vestibulum rhoncus tortor nunc, non feugiat 
+arcu sagittis in. Nam at quam vel urna posuere scelerisque. Aenean vitae ultrices dolor. 
+Fusce bibendum molestie lacinia.
+
+Praesent ultricies cursus magna. Nullam aliquet ipsum vel tellus molestie congue. Morbi lacinia pellentesque massa, finibus tincidunt nulla gravida vitae. Suspendisse quis sagittis augue, et molestie elit. Vivamus pellentesque cursus magna eu suscipit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam, est ut dictum tempor, leo urna varius lorem, eget porta eros magna non purus. Curabitur eu diam eget metus vulputate commodo vel eget augue. Nunc augue leo, convallis id fringilla nec, malesuada et nunc. Aenean fringilla erat nunc, sed pretium leo pretium quis.
+
+Cras varius elit eget ullamcorper luctus. Pellentesque habitant morbi tristique senectus et netus et 
+malesuada fames ac turpis egestas. Morbi porta, tortor et aliquam pretium, risus metus maximus orci, 
+ut porttitor ex nibh at urna. Integer mollis, turpis a vehicula hendrerit, purus velit dignissim urna, 
+quis ultrices urna leo vel velit. Aliquam placerat lectus a cursus sollicitudin. Proin fermentum odio
+ eu placerat pretium. Suspendisse potenti. Duis fringilla posuere congue. Fusce quis nisi non erat 
+ vestibulum imperdiet sed id augue. Suspendisse potenti. Ut semper nisi urna, vitae pulvinar arcu laoreet id. 
+ Suspendisse massa massa, hendrerit in placerat a, volutpat non velit. Maecenas placerat diam eros, 
+ sit amet aliquam mauris interdum id. Morbi et viverra sem, eget elementum sem.', 'images.jpg', TIMESTAMPADD(DAY, 1, current_timestamp()));
 
 
 --
@@ -137,66 +179,89 @@ INSERT INTO `codeigniter-forum`.`posts` (`id`, `user_id`, `subcategory_id`, `par
 --
 -- Dumping data for table `like_type`
 --
-INSERT INTO `like_type` (`id`, `type`) VALUES (NULL, 'like'), (NULL, 'dislike')
+INSERT INTO `codeigniter-forum`.`like_type` (`id`, `type`) VALUES (NULL, 'like'), (NULL, 'dislike');
 
 
 --
 -- Dumping data for table `like`
 --
-INSERT INTO `likes` (`id`, `user_id`, `post_id`, `like_type_id`) VALUES 
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
-(NULL, SELECT FLOOR(RAND()*(3-1+1))+1, SELECT FLOOR(RAND()*(32-1+1))+1, '1', SELECT FLOOR(RAND()*(2-1+1))+1),
+INSERT INTO `codeigniter-forum`.`likes` (`id`, `user_id`, `post_id`, `like_type_id`) VALUES 
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1)),
+(NULL, FLOOR(RAND()*(3-1+1)+1), FLOOR(RAND()*(32-1+1)+1), FLOOR(RAND()*(2)+1));
