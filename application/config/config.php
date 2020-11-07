@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/codeigniter-forum-beadando/';
+// $config['base_url'] = 'http://localhost/codeigniter-forum-beadando/';
+$config['base_url'] = 'http://local.rocket.co.in:8081/forum.test/codeigniter-forum-beadando/';
 
 /*
 |--------------------------------------------------------------------------
